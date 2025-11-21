@@ -1,0 +1,86 @@
+﻿more_scheme_interaction = {
+	interface_priority = 200
+	desc = increase_schemes_title
+	auto_accept = yes
+	ai_will_do = 0
+	is_shown = {
+		scope:actor = {
+			is_ai = no
+		}
+	}
+	send_option = {
+		flag = add_scheme_microscopic
+		localization = "add_scheme_microscopic_option"
+	}
+	send_option = {
+		flag = add_scheme_medium
+		localization = "add_scheme_medium_option"
+	}
+	send_option = {
+		flag = add_scheme_massive
+		localization = "add_scheme_massive_option"
+	}
+	on_accept = {
+		if = {
+			limit = { scope:add_scheme_microscopic = yes }
+			scope:recipient = {
+				remove_character_modifier = more_scheme_medium
+				remove_character_modifier = more_scheme_massive
+
+				add_character_modifier = {
+					modifier = more_scheme_microscopic
+					duration = -1 
+				}
+
+				send_interface_toast = {
+					title = increase_schemes_title
+					left_icon = root
+					custom_tooltip = {
+						text = increase_schemes_tooltip
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { scope:add_scheme_medium = yes }
+			scope:recipient = {
+				remove_character_modifier = more_scheme_microscopic
+				remove_character_modifier = more_scheme_massive
+
+				add_character_modifier = {
+					modifier = more_scheme_medium
+					duration = -1 
+				}
+
+				send_interface_toast = {
+					title = increase_schemes_title
+					left_icon = root
+					custom_tooltip = {
+						text = increase_schemes_tooltip
+					}
+				}
+			}
+		}
+		else_if = {
+			limit = { scope:add_scheme_massive = yes }
+			scope:recipient = {
+				remove_character_modifier = more_scheme_microscopic
+				remove_character_modifier = more_scheme_medium
+				
+				add_character_modifier = {
+					modifier = more_scheme_massive
+					duration = -1 
+				}
+
+				send_interface_toast = {
+					title = increase_schemes_title
+					left_icon = root
+					custom_tooltip = {
+						text = increase_schemes_tooltip
+					}
+				}
+			}
+		}
+	}
+
+}
